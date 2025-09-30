@@ -76,16 +76,13 @@ public class Client {
     }
 
     private void saveKeyAndCertificate(byte[] privateKeyBytes, byte[] certBytes) throws Exception {
-        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
         String keyPem = "-----BEGIN PRIVATE KEY-----\n" +
                 Base64.getMimeEncoder().encodeToString(privateKeyBytes) +
                 "\n-----END PRIVATE KEY-----";
 
         Files.write(Paths.get(name + ".key"), keyPem.getBytes());
 
-        CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
-        X509Certificate certificate = (X509Certificate) certFactory
-                .generateCertificate(new ByteArrayInputStream(certBytes));
+
 
         String certPem = "-----BEGIN CERTIFICATE-----\n" +
                 Base64.getMimeEncoder().encodeToString(certBytes) +
