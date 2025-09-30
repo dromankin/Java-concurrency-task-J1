@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group = 'ru.nsu.romankin.hoi'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'org.bouncycastle:bcpkix-jdk18on:1.76'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    manifest { attributes 'Main-Class': 'ru.nsu.romankin.hoi.Server' }
+    from { configurations.runtimeClasspath.collect { zipTree(it) } }
+    duplicatesStrategy = 'exclude'
+
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+}
