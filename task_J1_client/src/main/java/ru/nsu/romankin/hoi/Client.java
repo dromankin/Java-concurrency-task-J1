@@ -77,9 +77,6 @@ public class Client {
 
     private void saveKeyAndCertificate(byte[] privateKeyBytes, byte[] certBytes) throws Exception {
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
-
         String keyPem = "-----BEGIN PRIVATE KEY-----\n" +
                 Base64.getMimeEncoder().encodeToString(privateKeyBytes) +
                 "\n-----END PRIVATE KEY-----";
